@@ -2,7 +2,7 @@
 #include <cstring>
 #include "./Room.h"
 #include <vector>
-
+#include <map>
 
 using namespace std;
 using namespace Zuul;
@@ -47,9 +47,40 @@ void Room::dropItem(Item item)
 
 Item Room::pickupItem(int i)
 {
+  auto itemToErase = Room::items.begin() + i;
   Item itemToReturn = Room::items.at(i);
-
-  Room::items.erase(itemToReturn);
+  
+  Room::items.erase(itemToErase);
   
   return itemToReturn;
+}
+
+void Room::printItems()
+{
+  int i = 0;
+  for(auto& item : items)
+    {
+      cout << i << ": " << item.name << "\n";
+	i++;
+    }
+}
+
+void Room::addAdjacentRoom(Direction direction, Room room)
+{
+  Room::adjacentRooms[direction] = room;
+}
+
+void Room::printAdjacentRooms()
+{
+  map<Direction, Room>::iterator it = Room::adjacentRooms.begin();
+
+  while (it != Room::adjacentRooms.end()) {
+        cout << it->first << ": " << it->second.name << endl;
+        ++it;
+    }
+}
+
+Room Room::getAdjacentRoom(Direction direction)
+{
+  return Room::adjacentRooms[direction];
 }
