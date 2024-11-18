@@ -80,7 +80,7 @@ void Room::printAdjacentRooms()
     }
 }
 
-Room Room::getAdjacentRoom(Direction direction)
+Room* Room::getAdjacentRoom(Direction direction)
 {
-  return Room::adjacentRooms[direction];
+  return &Room::adjacentRooms[direction];
 }

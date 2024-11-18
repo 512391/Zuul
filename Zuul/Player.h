@@ -15,12 +15,13 @@ namespace Zuul
   {
     protected:
       Inventory* inventory;
-      Room currentRoom;
+      Room* currentRoom;
 
     public:
-      Player(Room room);
+      Player(Room* room);
       bool canPickup();
       void pickup(int i);
+    void drop(int i);
       void move(Direction direction);
   };
 }

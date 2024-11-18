@@ -5,13 +5,13 @@
 using namespace Zuul;
 using namespace std;
 
-Player::Player(Room room)
+Player::Player(Room* room)
 {
   Player::inventory = new Inventory();
   Player::currentRoom = room;
 
-  Player::currentRoom.printAdjacentRooms();
-  Player::currentRoom.printItems();
+  Player::currentRoom->printAdjacentRooms();
+  Player::currentRoom->printItems();
 }
 
 bool Player::canPickup()
@@ -24,14 +24,14 @@ bool Player::canPickup()
 }
 void Player::pickup(int i)
 {
-  Item item = Player::currentRoom.pickupItem(i);
+  Item item = Player::currentRoom->pickupItem(i);
 
   Player::inventory->items.push_back(item);
 }
 
 void Player::move(Direction direction)
 {
-  Player::currentRoom = Player::currentRoom.getAdjacentRoom(direction);
-  Player::currentRoom.printAdjacentRooms();
-  Player::currentRoom.printItems();
+  Player::currentRoom = Player::currentRoom->getAdjacentRoom(direction);
+  Player::currentRoom->printAdjacentRooms();
+  Player::currentRoom->printItems();
 }

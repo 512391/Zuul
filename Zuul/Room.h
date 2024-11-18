@@ -1,3 +1,6 @@
+#ifndef ROOM_H
+#define ROOM_H
+
 #include<vector>
 #include<iostream>
 #include <map>
@@ -39,7 +42,8 @@ namespace Zuul
       void printItems();
       void addAdjacentRoom(Direction direction, Room room);
       void printAdjacentRooms();
-      Room getAdjacentRoom(Direction direction);
+      Room* getAdjacentRoom(Direction direction);
   };
 }
 
+#endif
