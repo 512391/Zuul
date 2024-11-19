@@ -26,21 +26,20 @@ namespace Zuul
   class Room
   {
     protected:
-      char name[20];
-      std::vector<Item> items;
+      char name[25];
+      std::vector<Item*> items;
       int amountOfItems;
-      std::map<Direction, Room> adjacentRooms;
+      std::map<Direction, Room*> adjacentRooms;
+    std::map<Direction, char*> directionToWord;
     
     public:
-    //this constructor is just to make an instance and test
-      Room();
-      Room(int amountOfItem, Item* item, int itemsLength, char* title);
+    Room(char* title);
       void getName(char* out);
       bool canDrop();
-      void dropItem(Item item);
-      Item pickupItem(int i);
+      void dropItem(Item* item);
+      Item* pickupItem(int i);
       void printItems();
-      void addAdjacentRoom(Direction direction, Room room);
+      void addAdjacentRoom(Direction direction, Room* room);
       void printAdjacentRooms();
       Room* getAdjacentRoom(Direction direction);
   };

@@ -6,23 +6,23 @@
 
 using namespace std;
 using namespace Zuul;
-
-
-Room::Room()
+Room::Room(char* title)
 {
-  cout << "made a room";
-}
-Room::Room(int amountOfItem, Item* item, int itemsLength, char* title)
-{
-  Room::amountOfItems = amountOfItem;
+  Room::amountOfItems = 0;
   strcpy(Room::name, title);
 
-  Room::amountOfItems = itemsLength;
-  
-  for(int i = 0; i < itemsLength; i++)
-    {
-      Room::items.push_back(item[i]);
-    }
+  char north[6] = "North";
+  Room::directionToWord[North] = north;
+
+  char south[6] = "South";
+  Room::directionToWord[South] = south;
+
+  char west[6] = "West";
+  Room::directionToWord[West] = west;
+
+  char east[6] = "East";
+  Room::directionToWord[East] = east;
+
 }
 
 void Room::getName(char* out)
@@ -39,16 +39,16 @@ bool Room::canDrop()
   return true;
 }
 
-void Room::dropItem(Item item)
+void Room::dropItem(Item* item)
 {
   Room::items.push_back(item);
   Room::amountOfItems++;
 }
 
-Item Room::pickupItem(int i)
+Item* Room::pickupItem(int i)
 {
   auto itemToErase = Room::items.begin() + i;
-  Item itemToReturn = Room::items.at(i);
+  Item* itemToReturn = Room::items.at(i);
   
   Room::items.erase(itemToErase);
   
@@ -60,27 +60,27 @@ void Room::printItems()
   int i = 0;
   for(auto& item : items)
     {
-      cout << i << ": " << item.name << "\n";
+      cout << i << ": " << item->name << "\n";
 	i++;
     }
 }
 
-void Room::addAdjacentRoom(Direction direction, Room room)
+void Room::addAdjacentRoom(Direction direction, Room* room)
 {
   Room::adjacentRooms[direction] = room;
 }
 
 void Room::printAdjacentRooms()
 {
-  map<Direction, Room>::iterator it = Room::adjacentRooms.begin();
+  map<Direction, Room*>::iterator it = Room::adjacentRooms.begin();
 
   while (it != Room::adjacentRooms.end()) {
-        cout << it->first << ": " << it->second.name << endl;
+    cout << Room::directionToWord[it->first] << ": " << it->second->name << endl;
         ++it;
     }
 }
 
 Room* Room::getAdjacentRoom(Direction direction)
 {
-  return &Room::adjacentRooms[direction];
+  return Room::adjacentRooms[direction];
 }

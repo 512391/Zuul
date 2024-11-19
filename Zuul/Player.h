@@ -7,7 +7,7 @@ namespace Zuul
   {
     const int MAX_INVENTORY_ITEMS = 5;
 
-    std::vector<Item> items;
+    std::vector<Item*> items;
     int amountOfItems;
   };
 
@@ -15,13 +15,14 @@ namespace Zuul
   {
     protected:
       Inventory* inventory;
-      Room* currentRoom;
 
     public:
+    Room* currentRoom;
       Player(Room* room);
       bool canPickup();
       void pickup(int i);
     void drop(int i);
       void move(Direction direction);
+    void printInventory();
   };
 }
