@@ -3,6 +3,7 @@
 
 #include<vector>
 #include<iostream>
+#include <cstring>
 #include <map>
 
 namespace Zuul
@@ -13,6 +14,8 @@ namespace Zuul
   {
      char name[10];
      bool winner;
+
+    Item(char* title, bool win);
   };
 
   enum Direction
@@ -30,9 +33,10 @@ namespace Zuul
       std::vector<Item*> items;
       int amountOfItems;
       std::map<Direction, Room*> adjacentRooms;
-    std::map<Direction, char*> directionToWord;
+    std::map<Direction, const char*> directionToWord;
     
     public:
+    bool needKey = false;
     Room(char* title);
       void getName(char* out);
       bool canDrop();

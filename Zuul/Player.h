@@ -19,6 +19,7 @@ namespace Zuul
     public:
     Room* currentRoom;
       Player(Room* room);
+    bool hasKey();
       bool canPickup();
       void pickup(int i);
     void drop(int i);

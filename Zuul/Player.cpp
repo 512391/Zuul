@@ -50,11 +50,34 @@ void Player::drop(int i)
     }
 }
 
+bool Player::hasKey()
+{
+  for(auto& item : Player::inventory->items)
+    {
+      if(item->winner)
+	{
+	  return true;
+	}
+    }
+  return false;
+}
+
 void Player::move(Direction direction)
 {
-  Player::currentRoom = Player::currentRoom->getAdjacentRoom(direction);
-  Player::currentRoom->printAdjacentRooms();
-  Player::currentRoom->printItems();
+  if(Player::currentRoom->getAdjacentRoom(direction)->needKey && hasKey())
+    {
+      cout << "You won congrats on making it to the after part";
+    }
+  else if(Player::currentRoom->getAdjacentRoom(direction)->needKey)
+    {
+      cout << "ya need a key";
+    }
+  else
+    {
+      Player::currentRoom = Player::currentRoom->getAdjacentRoom(direction);
+      Player::currentRoom->printAdjacentRooms();
+      Player::currentRoom->printItems();
+    }
 }
 
 void Player::printInventory()

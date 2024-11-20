@@ -3,26 +3,33 @@
 #include "./Room.h"
 #include <vector>
 #include <map>
+#include <cstring>
 
 using namespace std;
 using namespace Zuul;
+
+Item::Item(char* title, bool win)
+{
+  strcpy(Item::name, title);
+  Item::winner = win;
+}
+
 Room::Room(char* title)
 {
   Room::amountOfItems = 0;
   strcpy(Room::name, title);
 
-  char north[6] = "North";
+  const char north[6] = "North";
   Room::directionToWord[North] = north;
 
-  char south[6] = "South";
+  const char south[6] = "South";
   Room::directionToWord[South] = south;
 
-  char west[6] = "West";
+  const char west[6] = "West";
   Room::directionToWord[West] = west;
 
-  char east[6] = "East";
+  const char east[6] = "East";
   Room::directionToWord[East] = east;
-
 }
 
 void Room::getName(char* out)
@@ -73,7 +80,7 @@ void Room::addAdjacentRoom(Direction direction, Room* room)
 void Room::printAdjacentRooms()
 {
   map<Direction, Room*>::iterator it = Room::adjacentRooms.begin();
-
+  
   while (it != Room::adjacentRooms.end()) {
     cout << Room::directionToWord[it->first] << ": " << it->second->name << endl;
         ++it;
